@@ -1,0 +1,13 @@
+{
+  "name": "gta6-hub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static GTA 6 fan site with a scheduled content-drafting pipeline",
+  "scripts": {
+    "generate": "node scripts/generate.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0"
+  }
+}
