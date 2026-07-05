@@ -64,6 +64,7 @@ const pagePath = path.join(ROOT, `${slug}.html`);
 if (existsSync(pagePath)) fail(`${slug}.html already exists — refusing to overwrite`);
 
 const today = new Date().toISOString().slice(0, 10);
+const monthYear = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
 const canonical = `${SITE_URL}/${slug}.html`;
 console.log(`generate: processing "${title}" (${slug}, ${type})`);
 
@@ -98,6 +99,7 @@ Generate this page:
 - type: ${type}
 - canonical URL (use exactly this): ${canonical}
 - today's date: ${today}
+- "Updated" month for the hero meta row (use exactly this): ${monthYear}
 
 Hard requirements, restated:
 - Output ONLY the HTML document, starting with <!doctype html>.
@@ -106,6 +108,7 @@ Hard requirements, restated:
 - JSON-LD: ${type === "money" ? "ItemList (Products with name+url only — no offers, prices, or ratings)" : "Article (plus FAQPage only if the page has a real FAQ section)"}.
 - ${type === "money" ? `Affiliate links must be Amazon SEARCH URLs only (https://www.amazon.com.be/s?k=...&tag=${AFFILIATE_TAG}) with rel="sponsored nofollow noopener" and target="_blank". Never invent ASINs, /dp/ links, prices, star ratings, or review counts.
 - Include the comparison table per CLAUDE.md's "Money-page comparison table" section: exactly 3 options across 5-7 category-appropriate spec rows, the middle best-value column highlighted with c-rec and the "Best all-round" label, green/amber badges where earned, the price row in tier words only (no currency), and the verbatim table-note line directly under the table.` : "No affiliate links on this info page."}
+- Layout per CLAUDE.md's "Article layout" section: hero header with category pill (${type === "money" ? '"Hardware guide"' : '"Guide" or "News"'}), the h1, and a meta row with "{N} min read" (word count / 200, rounded), "Updated ${monthYear}"${type === "money" ? ', and "{N} picks compared" matching the number of pick panels' : ""}; then the "Short answer" callout (class="shortanswer"); section h2s carry alternating accent bars (class="sec" / class="sec alt") — but never on h2s inside .panel blocks. Use only the existing palette colours (#ff4fa3, #3ce6ff).
 - Include the exact footer disclaimers block from CLAUDE.md.
 - Never state unconfirmed GTA 6 details as fact — label rumors/unconfirmed
   information clearly.`,
@@ -163,7 +166,12 @@ if (!html.includes("not affiliated with, endorsed"))
   errors.push("missing Rockstar non-affiliation footer disclaimer");
 if (!html.includes("As an Amazon Associate"))
   errors.push("missing Amazon Associate footer disclaimer");
-if (!html.includes("Last updated:")) errors.push('missing visible "Last updated:" line');
+if (!html.includes('class="hero"')) errors.push("missing hero header (class=\"hero\")");
+if (!html.includes('class="pill"')) errors.push("missing category pill in hero");
+if (!/\d+ min read/.test(html)) errors.push("missing read-time in hero meta row");
+if (!html.includes(`Updated ${monthYear}`)) errors.push(`missing "Updated ${monthYear}" in hero meta row`);
+if (!html.includes('class="shortanswer"')) errors.push('missing "short answer" callout (class="shortanswer")');
+if (!html.includes('class="sec"')) errors.push('missing accent-bar section headings (h2 class="sec")');
 
 const amazonHrefs = [...html.matchAll(/href="(https?:\/\/[^"]*amazon\.[^"]*)"/gi)].map((m) => m[1]);
 if (type === "money") {
@@ -183,6 +191,8 @@ if (type === "money") {
     errors.push('comparison table missing the highlighted recommended column (c-rec + "Best all-round" label)');
   if (!html.includes("General hardware guidance, not GTA 6-specific spec claims"))
     errors.push("missing the verbatim table-note line under the comparison table");
+  if (!/\d+ picks compared/.test(html))
+    errors.push('money page hero meta row missing "{N} picks compared"');
 } else if (amazonHrefs.length > 0) {
   errors.push("info page must not contain Amazon links");
 }

@@ -32,13 +32,44 @@ file is mandatory for every generated page.
 7. Exactly one `<h1>`.
 8. One `<script type="application/ld+json">` block with the JSON-LD for the
    page type (see below). The JSON must be valid.
-9. A visible "Last updated: {date}" line near the top of the article.
+9. A hero header, a "short answer" callout, and accent-bar section headings,
+   per "Article layout" below (the hero's meta row carries the visible
+   "Updated {Month YYYY}" date).
 10. Inline CSS only (copy the shared `<style>` block from the templates below).
     No external stylesheets, fonts, images, or scripts.
 11. Site header linking back to `/` and the shared site footer (see
     "Footer disclaimers"). 
 12. No fabricated facts. GTA 6 details that Rockstar Games has not confirmed
     must be labeled as unconfirmed/rumored, never stated as fact.
+
+## Article layout
+
+Every article opens with a hero header followed by a "short answer" callout:
+
+```html
+<header class="hero">
+  <span class="pill">{"Hardware guide" for money · "Guide" or "News" for info}</span>
+  <h1>{h1}</h1>
+  <p class="meta"><span>{N} min read</span><span>Updated {Month YYYY}</span><span>{money pages only: "{N} picks compared"}</span></p>
+</header>
+<div class="shortanswer">
+  <span class="sa-label">Short answer</span>
+  <p>{1–2 sentence summary of the page's key takeaway}</p>
+</div>
+```
+
+Rules:
+- Read time = total article word count ÷ 200, rounded (minimum 1), e.g.
+  "6 min read". "Updated" is month + year, e.g. "Updated July 2026". On money
+  pages, N in "{N} picks compared" matches the number of pick panels.
+- Money pages place the affiliate disclosure line directly after the short
+  answer box, before any affiliate link.
+- Section headings — the h2s that open page sections, **not** the h2s inside
+  `.panel` pick blocks — carry a left accent bar: `<h2 class="sec">` (magenta
+  bar), alternating with `<h2 class="sec alt">` (cyan bar) down the page.
+- All accents reuse the existing synthwave palette only: magenta `#ff4fa3`
+  and cyan `#3ce6ff` (the same hexes as index.html and the comparison
+  table). Never introduce new colours.
 
 ## Page types
 
@@ -109,6 +140,16 @@ table{border-collapse:collapse;width:100%;margin:16px 0}
 th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
 footer.site{border-top:1px solid var(--line);padding:24px 0;margin-top:24px;text-align:center}
 footer.site p{color:var(--muted);font-size:13px;margin:6px 0}
+.hero{padding:6px 0 20px;border-bottom:3px solid #ff4fa3;margin-bottom:24px}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3ce6ff;border:1px solid #3ce6ff;border-radius:999px;padding:3px 12px;margin-bottom:14px}
+.hero h1{margin:0 0 12px;color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:14px;margin:0}
+.shortanswer{background:var(--panel);border:1px solid var(--line);border-left:4px solid #3ce6ff;border-radius:0 10px 10px 0;padding:14px 18px;margin:0 0 24px}
+.shortanswer p{margin:0}
+.sa-label{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#3ce6ff;margin-bottom:4px}
+h2.sec{display:flex;align-items:center;gap:10px}
+h2.sec::before{content:"";width:4px;height:22px;border-radius:2px;background:#ff4fa3;flex:none}
+h2.sec.alt::before{background:#3ce6ff}
 ```
 
 ## Page template (both types)
@@ -133,12 +174,13 @@ footer.site p{color:var(--muted);font-size:13px;margin:6px 0}
 <body>
   <header class="site"><div class="wrap"><a class="brand" href="/">Vice Report</a></div></header>
   <main><div class="wrap">
-    <h1>{h1}</h1>
-    <p class="updated">Last updated: {Month D, YYYY}</p>
+    {hero header — see "Article layout"}
+    {"short answer" callout — see "Article layout"}
     <!-- money pages: disclosure line here, before any affiliate link -->
-    <!-- body: intro, sections with h2/h3; money pages use .panel blocks
-         per pick with a .cta affiliate link; info pages use prose,
-         tables, and optionally a FAQ section -->
+    <!-- body: intro, sections opened by accent-bar h2s (class="sec" /
+         "sec alt", alternating); money pages use .panel blocks per pick
+         with a .cta affiliate link; info pages use prose, tables, and
+         optionally a FAQ section -->
   </main></div>
   {footer disclaimers block, verbatim}
 </body>
