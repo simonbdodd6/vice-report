@@ -31,6 +31,17 @@ table{border-collapse:collapse;width:100%;margin:16px 0}
 th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
 footer.site{border-top:1px solid var(--line);padding:24px 0;margin-top:24px;text-align:center}
 footer.site p{color:var(--muted);font-size:13px;margin:6px 0}
+.tablewrap{overflow-x:auto;margin:20px 0}
+.compare{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;min-width:600px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+.compare>div{padding:10px 12px;border-top:1px solid var(--line)}
+.compare .c-head{border-top:none;font-weight:700;background:rgba(60,230,255,.07)}
+.compare .c-spec{color:var(--muted);font-weight:600}
+.compare .c-rec{border-left:3px solid #3ce6ff;background:rgba(60,230,255,.05)}
+.compare .c-label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3ce6ff}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:700}
+.badge--best{background:rgba(74,222,128,.15);color:#4ade80}
+.badge--warn{background:rgba(251,191,36,.15);color:#fbbf24}
+.table-note{color:var(--muted);font-size:13px;margin:8px 0 24px}
   </style>
   <script type="application/ld+json">
   {
@@ -82,6 +93,41 @@ footer.site p{color:var(--muted);font-size:13px;margin:6px 0}
     that you do not need anything exotic — you need a panel that gets the
     gaming fundamentals right. This guide covers what actually matters and
     three picks that cover most budgets.</p>
+
+    <h2>At a glance: our three picks compared</h2>
+    <div class="tablewrap">
+      <div class="compare" role="table" aria-label="4K TV comparison">
+        <div class="c-head"></div>
+        <div class="c-head">LG C-series OLED</div>
+        <div class="c-head c-rec"><span class="c-label">Best all-round</span>Samsung QN90 Neo QLED</div>
+        <div class="c-head">Hisense U7 Mini-LED</div>
+        <div class="c-spec">Contrast / black levels</div>
+        <div>Per-pixel OLED, true blacks <span class="badge badge--best">Best</span></div>
+        <div class="c-rec">Very good — Mini-LED local dimming</div>
+        <div>Good — some blooming in dark scenes</div>
+        <div class="c-spec">Peak brightness</div>
+        <div>Moderate — typical OLED limits</div>
+        <div class="c-rec">Excellent, ideal for bright rooms <span class="badge badge--best">Best</span></div>
+        <div>Very good for the tier</div>
+        <div class="c-spec">Input lag (game mode)</div>
+        <div>Excellent — class-leading <span class="badge badge--best">Best</span></div>
+        <div class="c-rec">Excellent, with Game Bar tools</div>
+        <div>Solid for the tier</div>
+        <div class="c-spec">Refresh rate / VRR</div>
+        <div>4K 120Hz — HDMI Forum, G-Sync, FreeSync</div>
+        <div class="c-rec">4K 120Hz — VRR and ALLM</div>
+        <div>120Hz-class — VRR and ALLM</div>
+        <div class="c-spec">Burn-in risk</div>
+        <div>Possible with static content <span class="badge badge--warn">Caution</span></div>
+        <div class="c-rec">None <span class="badge badge--best">Best</span></div>
+        <div>None</div>
+        <div class="c-spec">Price tier</div>
+        <div>Premium</div>
+        <div class="c-rec">Mid-range</div>
+        <div>Budget</div>
+      </div>
+    </div>
+    <p class="table-note">General hardware guidance, not GTA 6-specific spec claims — Rockstar has not confirmed PC specs.</p>
 
     <h2>What matters in a TV for GTA 6</h2>
     <ul>
