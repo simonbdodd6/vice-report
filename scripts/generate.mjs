@@ -104,7 +104,7 @@ Hard requirements, restated:
 - Unique <title> (≤60 chars), unique meta description (140–160 chars), the
   canonical URL above, and full Open Graph tags.
 - JSON-LD: ${type === "money" ? "ItemList (Products with name+url only — no offers, prices, or ratings)" : "Article (plus FAQPage only if the page has a real FAQ section)"}.
-- ${type === "money" ? `Affiliate links must be Amazon SEARCH URLs only (https://www.amazon.com/s?k=...&tag=${AFFILIATE_TAG}) with rel="sponsored nofollow noopener" and target="_blank". Never invent ASINs, /dp/ links, prices, star ratings, or review counts.` : "No affiliate links on this info page."}
+- ${type === "money" ? `Affiliate links must be Amazon SEARCH URLs only (https://www.amazon.com.be/s?k=...&tag=${AFFILIATE_TAG}) with rel="sponsored nofollow noopener" and target="_blank". Never invent ASINs, /dp/ links, prices, star ratings, or review counts.` : "No affiliate links on this info page."}
 - Include the exact footer disclaimers block from CLAUDE.md.
 - Never state unconfirmed GTA 6 details as fact — label rumors/unconfirmed
   information clearly.`,
@@ -169,7 +169,7 @@ if (type === "money") {
   if (amazonHrefs.length === 0) errors.push("money page has no Amazon affiliate links");
   for (const href of amazonHrefs) {
     if (!href.includes(`tag=${AFFILIATE_TAG}`)) errors.push(`Amazon link missing tag=${AFFILIATE_TAG}: ${href}`);
-    if (!/amazon\.com\/s\?/.test(href)) errors.push(`Amazon link is not a search URL: ${href}`);
+    if (!/amazon\.com\.be\/s\?/.test(href)) errors.push(`Amazon link is not an amazon.com.be search URL: ${href}`);
   }
   const sponsoredCount = (html.match(/rel="sponsored nofollow noopener"/g) ?? []).length;
   if (sponsoredCount < amazonHrefs.length)
