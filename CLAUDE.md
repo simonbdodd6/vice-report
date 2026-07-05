@@ -13,9 +13,8 @@ file is mandatory for every generated page.
   "Leonida" ("Vice" alone is fine; "Vice City" is not). Referencing GTA 6 as a
   factual keyword in titles, headings, and body copy is fine and expected —
   only the brand identity must stay independent.
-- Canonical base URL: **https://example.com** — PLACEHOLDER. Replace with the
-  real domain before deploying (the generate script also honors a `SITE_URL`
-  env var). Never emit a URL with a different host.
+- Canonical base URL: **https://vice-report.vercel.app** (the generate script
+  also honors a `SITE_URL` env var). Never emit a URL with a different host.
 - All pages are flat `.html` files in the repo root. Slugs are lowercase
   letters, digits, and hyphens only.
 - Homepage is `index.html`; the sitemap is `sitemap.xml`.
