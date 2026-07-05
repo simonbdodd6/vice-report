@@ -1,5 +1,23 @@
 # Work queue: slug | page title | type(info|money) — first pending line is processed next
-best-capture-card-for-gta-6 | Best Capture Card for GTA 6 | money
 gta-6-map-size | GTA 6 Map Size vs GTA 5 | info
+best-capture-card-for-gta-6 | Best Capture Card for GTA 6 | money
 best-controller-for-gta-6 | Best Controller for GTA 6 | money
 gta-6-editions-compared | GTA 6 Standard vs Ultimate Edition | info
+best-gpu-for-gta-6 | Best Graphics Card for GTA 6 | money
+can-an-rtx-3060-run-gta-6 | Can an RTX 3060 Run GTA 6? | money
+gta-6-release-date | GTA 6 Release Date and Platforms | info
+can-an-rtx-4060-run-gta-6 | Can an RTX 4060 Run GTA 6? | money
+best-ssd-for-gta-6 | Best SSD for GTA 6 | money
+gta-6-pc-requirements | GTA 6 PC System Requirements Explained | info
+can-a-gtx-1660-run-gta-6 | Can a GTX 1660 Run GTA 6? | money
+best-monitor-for-gta-6 | Best Monitor for GTA 6 | money
+gta-6-download-size | GTA 6 Download Size and Storage | info
+can-an-rtx-3070-run-gta-6 | Can an RTX 3070 Run GTA 6? | money
+best-cpu-for-gta-6 | Best CPU for GTA 6 | money
+gta-6-pc-release-prediction | When Will GTA 6 Come to PC? | info
+can-an-rtx-4070-run-gta-6 | Can an RTX 4070 Run GTA 6? | money
+best-ram-for-gta-6 | Best RAM for GTA 6 | money
+can-a-gtx-1060-run-gta-6 | Can a GTX 1060 Run GTA 6? | money
+best-gaming-pc-for-gta-6 | Best Prebuilt Gaming PC for GTA 6 | money
+can-an-rtx-2060-run-gta-6 | Can an RTX 2060 Run GTA 6? | money
+can-an-rx-6600-run-gta-6 | Can an RX 6600 Run GTA 6? | money
