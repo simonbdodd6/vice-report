@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITE_URL = (process.env.SITE_URL ?? "https://vice-report.vercel.app").replace(/\/+$/, "");
 const MODEL = process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5";
-const AFFILIATE_TAG = "YOURTAG-20";
+const AFFILIATE_TAG = "vicereport-21";
 
 const fail = (msg) => {
   console.error(`generate: ERROR: ${msg}`);

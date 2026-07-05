@@ -43,4 +43,4 @@ jobs:
             - [ ] Facts are accurate; unconfirmed GTA 6 details are labeled as such
             - [ ] No fabricated prices, star ratings, or product links
             - [ ] Title/meta/canonical/JSON-LD follow CLAUDE.md
-            - [ ] Affiliate links use `tag=YOURTAG-20` with `rel="sponsored nofollow noopener"`
+            - [ ] Affiliate links use `tag=vicereport-21` with `rel="sponsored nofollow noopener"`

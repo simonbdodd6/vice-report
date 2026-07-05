@@ -18,7 +18,7 @@ file is mandatory for every generated page.
 - All pages are flat `.html` files in the repo root. Slugs are lowercase
   letters, digits, and hyphens only.
 - Homepage is `index.html`; the sitemap is `sitemap.xml`.
-- Amazon affiliate tag: **YOURTAG-20** (placeholder — replace before deploying).
+- Amazon affiliate tag: **vicereport-21**.
 
 ## Rules for every page
 
@@ -55,7 +55,7 @@ file is mandatory for every generated page.
   search link). **Never** include `offers`, `price`, `aggregateRating`,
   `review`, or `ratingValue` — we do not publish prices or star ratings.
 - Affiliate links must be **Amazon search URLs only**, in the form
-  `https://www.amazon.com/s?k={url-encoded query}&tag=YOURTAG-20`.
+  `https://www.amazon.com/s?k={url-encoded query}&tag=vicereport-21`.
   Never invent ASINs, product URLs, or direct `/dp/` links.
 - Every affiliate link must have `rel="sponsored nofollow noopener"` and
   `target="_blank"`.
@@ -149,7 +149,7 @@ Money-page pick block:
   <h2>{pick label — e.g. "Best overall: LG C-series OLED"}</h2>
   <p>{why it fits GTA 6 — panel tech, HDMI 2.1, VRR, input lag; no prices/ratings}</p>
   <ul>{3–5 spec bullets}</ul>
-  <a class="cta" href="https://www.amazon.com/s?k={query}&amp;tag=YOURTAG-20"
+  <a class="cta" href="https://www.amazon.com/s?k={query}&amp;tag=vicereport-21"
      rel="sponsored nofollow noopener" target="_blank">See on Amazon</a>
 </section>
 ```
