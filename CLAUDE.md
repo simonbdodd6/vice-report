@@ -65,6 +65,9 @@ file is mandatory for every generated page.
   wording ("flagship", "mid-range", "budget") is fine; dollar figures are not.
 - Recommend real, well-known product lines only. If unsure a product exists,
   pick a category description instead ("a current LG C-series OLED").
+- Every money page must include one comparison table (see "Money-page
+  comparison table" below), placed after the intro and disclosure line and
+  before the first pick panel.
 
 ## Footer disclaimers (verbatim, on every page)
 
@@ -152,6 +155,63 @@ Money-page pick block:
   <a class="cta" href="https://www.amazon.com.be/s?k={query}&amp;tag=vicereport-21"
      rel="sponsored nofollow noopener" target="_blank">See on Amazon</a>
 </section>
+```
+
+## Money-page comparison table
+
+Every money page includes exactly one comparison table near the top: **3
+options** (the page's premium / best-value / budget picks, or the category's
+natural tiers) compared across **5–7 category-appropriate spec rows**. Pick
+rows that matter for the product: TVs → contrast, peak brightness, input lag,
+refresh/VRR, burn-in risk, price tier; SSDs → sequential read, capacity
+options, interface, endurance, price tier; GPUs → VRAM, resolution class,
+power draw, upscaling support, price tier; controllers → latency, battery,
+extras, price tier — and so on.
+
+Rules:
+- The **middle column is the best-value recommendation**: its header cell and
+  every body cell in that column carry the `c-rec` class, and the header
+  includes the `Best all-round` label (see skeleton).
+- Use rating badges where a cell earns one: `badge--best` (green) for the best
+  option in a row, `badge--warn` (amber) for a genuine caution (burn-in risk,
+  low VRAM, slower interface). Plain text cells otherwise.
+- The price row must use **tier words only** ("Premium" / "Mid-range" /
+  "Budget") — never currency amounts, per the no-prices rule.
+- Directly under the table, include this line verbatim:
+  `<p class="table-note">General hardware guidance, not GTA 6-specific spec claims — Rockstar has not confirmed PC specs.</p>`
+- Append this CSS to the shared `<style>` block (same `<style>` tag):
+
+```css
+.tablewrap{overflow-x:auto;margin:20px 0}
+.compare{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;min-width:600px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+.compare>div{padding:10px 12px;border-top:1px solid var(--line)}
+.compare .c-head{border-top:none;font-weight:700;background:rgba(60,230,255,.07)}
+.compare .c-spec{color:var(--muted);font-weight:600}
+.compare .c-rec{border-left:3px solid #3ce6ff;background:rgba(60,230,255,.05)}
+.compare .c-label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3ce6ff}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:700}
+.badge--best{background:rgba(74,222,128,.15);color:#4ade80}
+.badge--warn{background:rgba(251,191,36,.15);color:#fbbf24}
+.table-note{color:var(--muted);font-size:13px;margin:8px 0 24px}
+```
+
+- Table markup skeleton (a CSS grid, 4 columns: spec label + 3 options; one
+  set of 4 `<div>`s per spec row):
+
+```html
+<div class="tablewrap">
+  <div class="compare" role="table" aria-label="{category} comparison">
+    <div class="c-head"></div>
+    <div class="c-head">{Premium pick}</div>
+    <div class="c-head c-rec"><span class="c-label">Best all-round</span>{Best-value pick}</div>
+    <div class="c-head">{Budget pick}</div>
+    <div class="c-spec">{Spec name}</div>
+    <div>{value}</div>
+    <div class="c-rec">{value} <span class="badge badge--best">Best</span></div>
+    <div>{value} <span class="badge badge--warn">Caution</span></div>
+  </div>
+</div>
+<p class="table-note">General hardware guidance, not GTA 6-specific spec claims — Rockstar has not confirmed PC specs.</p>
 ```
 
 ## Homepage cards

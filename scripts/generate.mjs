@@ -104,7 +104,8 @@ Hard requirements, restated:
 - Unique <title> (≤60 chars), unique meta description (140–160 chars), the
   canonical URL above, and full Open Graph tags.
 - JSON-LD: ${type === "money" ? "ItemList (Products with name+url only — no offers, prices, or ratings)" : "Article (plus FAQPage only if the page has a real FAQ section)"}.
-- ${type === "money" ? `Affiliate links must be Amazon SEARCH URLs only (https://www.amazon.com.be/s?k=...&tag=${AFFILIATE_TAG}) with rel="sponsored nofollow noopener" and target="_blank". Never invent ASINs, /dp/ links, prices, star ratings, or review counts.` : "No affiliate links on this info page."}
+- ${type === "money" ? `Affiliate links must be Amazon SEARCH URLs only (https://www.amazon.com.be/s?k=...&tag=${AFFILIATE_TAG}) with rel="sponsored nofollow noopener" and target="_blank". Never invent ASINs, /dp/ links, prices, star ratings, or review counts.
+- Include the comparison table per CLAUDE.md's "Money-page comparison table" section: exactly 3 options across 5-7 category-appropriate spec rows, the middle best-value column highlighted with c-rec and the "Best all-round" label, green/amber badges where earned, the price row in tier words only (no currency), and the verbatim table-note line directly under the table.` : "No affiliate links on this info page."}
 - Include the exact footer disclaimers block from CLAUDE.md.
 - Never state unconfirmed GTA 6 details as fact — label rumors/unconfirmed
   information clearly.`,
@@ -176,6 +177,12 @@ if (type === "money") {
     errors.push(`only ${sponsoredCount}/${amazonHrefs.length} Amazon links carry rel="sponsored nofollow noopener"`);
   if (!html.includes("Disclosure:"))
     errors.push("money page missing the inline affiliate disclosure line");
+  if (!html.includes('class="compare"'))
+    errors.push('money page missing the comparison table (class="compare")');
+  else if (!html.includes("c-rec") || !html.includes("Best all-round"))
+    errors.push('comparison table missing the highlighted recommended column (c-rec + "Best all-round" label)');
+  if (!html.includes("General hardware guidance, not GTA 6-specific spec claims"))
+    errors.push("missing the verbatim table-note line under the comparison table");
 } else if (amazonHrefs.length > 0) {
   errors.push("info page must not contain Amazon links");
 }
