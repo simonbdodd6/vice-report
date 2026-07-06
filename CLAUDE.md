@@ -101,6 +101,9 @@ Rules:
 - Every money page must include one comparison table (see "Money-page
   comparison table" below), placed after the intro and disclosure line and
   before the first pick panel.
+- Money pages about screen-based products (TVs, monitors) open each pick
+  panel with a pure-CSS "screen" graphic (see "Per-pick screen graphic"
+  below). Other product categories skip it.
 
 ## Footer disclaimers (verbatim, on every page)
 
@@ -201,6 +204,8 @@ Money-page pick block:
 
 ```html
 <section class="panel">
+  <!-- screen-product pages (TVs, monitors) only: .tvshot graphic here,
+       before the h2 — see "Per-pick screen graphic" -->
   <h2>{pick label — e.g. "Best overall: LG C-series OLED"}</h2>
   <p>{why it fits GTA 6 — panel tech, HDMI 2.1, VRR, input lag; no prices/ratings}</p>
   <ul>{3–5 spec bullets}</ul>
@@ -264,6 +269,60 @@ Rules:
   </div>
 </div>
 <p class="table-note">General hardware guidance, not GTA 6-specific spec claims — Rockstar has not confirmed PC specs.</p>
+```
+
+## Per-pick screen graphic (screen-product money pages)
+
+On money pages whose picks are screen-based products (TVs, monitors), every
+pick panel opens with an original pure-CSS "screen" graphic — no images, no
+external assets — placed before the panel's `<h2>`:
+
+- A 16:10 screen rectangle with a dark 3px bezel (`#120820`), rounded
+  corners, and a small centered stand nub below it.
+- The screen interior carries a synthwave glow: a radial gradient in the
+  pick's role colour over the dark purple base, plus a faint cyan
+  perspective grid rising from the bottom edge
+  (`perspective(150px) rotateX(58deg)`).
+- Colour-code the glow and role label per pick role, existing palette hexes
+  only: magenta `#ff4fa3` (`rgba(255,79,163,…)`) for the premium /
+  picture-quality pick, cyan `#3ce6ff` (`rgba(60,230,255,…)`) for the
+  recommended / best all-round pick, purple `#c86bff`
+  (`rgba(200,107,255,…)`) for the value / budget pick. The colour roles
+  should match the comparison-table columns (cyan = the `c-rec` pick).
+- Under the graphic, a caption: a small uppercase role label in the role
+  colour, then the product name and panel type
+  (e.g. "Samsung QN90 Neo QLED · Mini-LED panel"). No prices or ratings in
+  the caption.
+- The graphic is decorative — mark the drawing `aria-hidden="true"`; the
+  caption carries the accessible text.
+- Append this CSS to the shared `<style>` block (same `<style>` tag):
+
+```css
+.tvshot{max-width:320px;margin:2px 0 18px}
+.tv{position:relative;aspect-ratio:16/10;border:3px solid #120820;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#2a0d45 0%,#120820 100%);box-shadow:0 0 0 1px var(--line)}
+.tv-screen{position:absolute;inset:0}
+.tvshot--pink .tv-screen{background:radial-gradient(90% 85% at 50% 30%,rgba(255,79,163,.5) 0%,rgba(255,79,163,.14) 45%,rgba(255,79,163,0) 72%)}
+.tvshot--cyan .tv-screen{background:radial-gradient(90% 85% at 50% 30%,rgba(60,230,255,.5) 0%,rgba(60,230,255,.14) 45%,rgba(60,230,255,0) 72%)}
+.tvshot--purple .tv-screen{background:radial-gradient(90% 85% at 50% 30%,rgba(200,107,255,.5) 0%,rgba(200,107,255,.14) 45%,rgba(200,107,255,0) 72%)}
+.tv-grid{position:absolute;left:-35%;right:-35%;bottom:-14%;height:70%;background:repeating-linear-gradient(90deg,rgba(60,230,255,.25) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(60,230,255,.25) 0 1px,transparent 1px 20px);transform:perspective(150px) rotateX(58deg);transform-origin:50% 100%}
+.tv-stand{width:64px;height:9px;margin:0 auto;background:#120820;border-radius:0 0 7px 7px;box-shadow:0 1px 0 var(--line)}
+.tv-caption{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.tv-role{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+.tvshot--pink .tv-role{color:#ff4fa3}
+.tvshot--cyan .tv-role{color:#3ce6ff}
+.tvshot--purple .tv-role{color:#c86bff}
+```
+
+- Markup skeleton (first child of the pick's `section.panel`, one per pick;
+  variant class `tvshot--pink` / `tvshot--cyan` / `tvshot--purple` per the
+  colour roles above):
+
+```html
+<div class="tvshot tvshot--cyan">
+  <div class="tv" aria-hidden="true"><div class="tv-screen"><div class="tv-grid"></div></div></div>
+  <div class="tv-stand" aria-hidden="true"></div>
+  <p class="tv-caption"><span class="tv-role">{role label — e.g. "Best all-round"}</span>{product name} · {panel type}</p>
+</div>
 ```
 
 ## Homepage cards

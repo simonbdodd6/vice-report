@@ -60,6 +60,19 @@ footer.site a{color:var(--cyan)}
 h2.sec{display:flex;align-items:center;gap:10px}
 h2.sec::before{content:"";width:4px;height:22px;border-radius:2px;background:#ff4fa3;flex:none}
 h2.sec.alt::before{background:#3ce6ff}
+.tvshot{max-width:320px;margin:2px 0 18px}
+.tv{position:relative;aspect-ratio:16/10;border:3px solid #120820;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#2a0d45 0%,#120820 100%);box-shadow:0 0 0 1px var(--line)}
+.tv-screen{position:absolute;inset:0}
+.tvshot--pink .tv-screen{background:radial-gradient(90% 85% at 50% 30%,rgba(255,79,163,.5) 0%,rgba(255,79,163,.14) 45%,rgba(255,79,163,0) 72%)}
+.tvshot--cyan .tv-screen{background:radial-gradient(90% 85% at 50% 30%,rgba(60,230,255,.5) 0%,rgba(60,230,255,.14) 45%,rgba(60,230,255,0) 72%)}
+.tvshot--purple .tv-screen{background:radial-gradient(90% 85% at 50% 30%,rgba(200,107,255,.5) 0%,rgba(200,107,255,.14) 45%,rgba(200,107,255,0) 72%)}
+.tv-grid{position:absolute;left:-35%;right:-35%;bottom:-14%;height:70%;background:repeating-linear-gradient(90deg,rgba(60,230,255,.25) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(60,230,255,.25) 0 1px,transparent 1px 20px);transform:perspective(150px) rotateX(58deg);transform-origin:50% 100%}
+.tv-stand{width:64px;height:9px;margin:0 auto;background:#120820;border-radius:0 0 7px 7px;box-shadow:0 1px 0 var(--line)}
+.tv-caption{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.tv-role{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+.tvshot--pink .tv-role{color:#ff4fa3}
+.tvshot--cyan .tv-role{color:#3ce6ff}
+.tvshot--purple .tv-role{color:#c86bff}
   </style>
   <script type="application/ld+json">
   {
@@ -178,6 +191,11 @@ h2.sec.alt::before{background:#3ce6ff}
     <h2 class="sec">Our picks</h2>
 
     <section class="panel">
+      <div class="tvshot tvshot--cyan">
+        <div class="tv" aria-hidden="true"><div class="tv-screen"><div class="tv-grid"></div></div></div>
+        <div class="tv-stand" aria-hidden="true"></div>
+        <p class="tv-caption"><span class="tv-role">Best all-round</span>Samsung QN90 Neo QLED · Mini-LED panel</p>
+      </div>
       <h2>Best all-round: Samsung QN90-series Neo QLED</h2>
       <p>Our top recommendation for most players. Open-world games get played
       long and at all hours, and the QN90 fits that reality: a Mini-LED
@@ -196,6 +214,11 @@ h2.sec.alt::before{background:#3ce6ff}
     </section>
 
     <section class="panel">
+      <div class="tvshot tvshot--pink">
+        <div class="tv" aria-hidden="true"><div class="tv-screen"><div class="tv-grid"></div></div></div>
+        <div class="tv-stand" aria-hidden="true"></div>
+        <p class="tv-caption"><span class="tv-role">Picture pick</span>LG C-series · OLED panel</p>
+      </div>
       <h2>Picture-quality pick for dark rooms: LG C-series OLED</h2>
       <p>If you play in a dark or light-controlled room and want the best
       image GTA 6 can produce, OLED remains the one to beat: per-pixel
@@ -215,6 +238,11 @@ h2.sec.alt::before{background:#3ce6ff}
     </section>
 
     <section class="panel">
+      <div class="tvshot tvshot--purple">
+        <div class="tv" aria-hidden="true"><div class="tv-screen"><div class="tv-grid"></div></div></div>
+        <div class="tv-stand" aria-hidden="true"></div>
+        <p class="tv-caption"><span class="tv-role">Value pick</span>Hisense U7 · Mini-LED panel</p>
+      </div>
       <h2>Best budget: Hisense U7-series Mini-LED</h2>
       <p>The budget tier is where TVs usually cut the gaming features first,
       which is what makes Hisense's U7 line notable: it keeps the 120Hz-class
