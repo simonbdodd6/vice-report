@@ -70,7 +70,8 @@ Rules:
 - All colours reuse the existing synthwave palette only, lifted from
   index.html: accents magenta `#ff4fa3` and cyan `#3ce6ff`, gradient purple
   `#c86bff`, background purples `#120820` / `#2a0d45` / `#571046`, panel
-  `rgba(23,10,40,.72)`, line `#4c2a6e`, text `#f4eefc`, muted `#c3afdb`.
+  `rgba(23,10,40,.72)`, line `#4c2a6e`, text `#f4eefc`, muted `#c3afdb`,
+  dim `#3a3358` (only for the unfilled euros in the price-tier indicator).
   Never introduce new colours.
 
 ## Page types
@@ -293,6 +294,18 @@ external assets — placed before the panel's `<h2>`:
   colour, then the product name and panel type
   (e.g. "Samsung QN90 Neo QLED · Mini-LED panel"). No prices or ratings in
   the caption.
+- On the screen itself, a small glowing panel-type label ("OLED",
+  "Mini-LED", …) centred near the top (`.tv-ptype`), in the pick's role
+  colour with a soft matching text-shadow. It lives inside the
+  `aria-hidden` drawing — the caption already carries the accessible text.
+- Below the caption, a price-tier indicator (`.tv-tier`): three euro
+  symbols, with the tier's count filled in the role colour (`.e-on`) and
+  the remainder dimmed `#3a3358` (`.e-off`), and a tier-word label under
+  them — "Premium tier" (€€€) / "Mid-range tier" (€€) / "Budget tier" (€),
+  matching the comparison table's price row. These are **relative tier
+  indicators only — never real prices, currency amounts, discounts, or
+  ratings** (the no-prices rule applies here too). The euros span is
+  `aria-hidden`; the tier-word label is the accessible text.
 - The graphic is decorative — mark the drawing `aria-hidden="true"`; the
   caption carries the accessible text.
 - Append this CSS to the shared `<style>` block (same `<style>` tag):
@@ -311,17 +324,30 @@ external assets — placed before the panel's `<h2>`:
 .tvshot--pink .tv-role{color:#ff4fa3}
 .tvshot--cyan .tv-role{color:#3ce6ff}
 .tvshot--purple .tv-role{color:#c86bff}
+.tv-ptype{position:absolute;top:16%;left:0;right:0;text-align:center;font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+.tvshot--pink .tv-ptype{color:#ff4fa3;text-shadow:0 0 10px rgba(255,79,163,.8)}
+.tvshot--cyan .tv-ptype{color:#3ce6ff;text-shadow:0 0 10px rgba(60,230,255,.8)}
+.tvshot--purple .tv-ptype{color:#c86bff;text-shadow:0 0 10px rgba(200,107,255,.8)}
+.tv-tier{margin:4px 0 0;font-size:14px;line-height:1.3}
+.tv-euros{display:block;font-weight:800;letter-spacing:.08em}
+.tv-euros .e-off{color:#3a3358}
+.tvshot--pink .e-on{color:#ff4fa3}
+.tvshot--cyan .e-on{color:#3ce6ff}
+.tvshot--purple .e-on{color:#c86bff}
+.tv-tier-label{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 ```
 
 - Markup skeleton (first child of the pick's `section.panel`, one per pick;
   variant class `tvshot--pink` / `tvshot--cyan` / `tvshot--purple` per the
-  colour roles above):
+  colour roles above; `.e-on`/`.e-off` split per the tier — €€€ premium,
+  €€ mid-range, € budget):
 
 ```html
 <div class="tvshot tvshot--cyan">
-  <div class="tv" aria-hidden="true"><div class="tv-screen"><div class="tv-grid"></div></div></div>
+  <div class="tv" aria-hidden="true"><div class="tv-screen"><div class="tv-grid"></div><span class="tv-ptype">{panel type}</span></div></div>
   <div class="tv-stand" aria-hidden="true"></div>
   <p class="tv-caption"><span class="tv-role">{role label — e.g. "Best all-round"}</span>{product name} · {panel type}</p>
+  <p class="tv-tier"><span class="tv-euros" aria-hidden="true"><span class="e-on">€€</span><span class="e-off">€</span></span><span class="tv-tier-label">Mid-range tier</span></p>
 </div>
 ```
 
