@@ -1,5 +1,4 @@
 # Work queue: slug | page title | type(info|money) — first pending line is processed next
-best-capture-card-for-gta-6 | Best Capture Card for GTA 6 | money
 best-controller-for-gta-6 | Best Controller for GTA 6 | money
 gta-6-editions-compared | GTA 6 Standard vs Ultimate Edition | info
 best-gpu-for-gta-6 | Best Graphics Card for GTA 6 | money
